@@ -2,8 +2,8 @@ import PerfilUsuario from "../interfaces/usuario";
 
 const Perfil = () => {
     const usuario = {
-        nome: "Izi",
-        email: "i@perfil.com",
+        nome: "luis",
+        email: "L@perfil.com",
         idade: 18
     };
     
