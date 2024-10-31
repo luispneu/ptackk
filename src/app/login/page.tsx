@@ -65,12 +65,10 @@ export default function Login(): ReactElement {
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
-                    <div className={styles.iconForm}>
-                        <Image alt="Logo" width={24.23} height={24.23} src="/o-email.png" />
-                    </div>
+                    
                 </div>
                 <div className={styles.formGroup}>
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">Senha</label>
                     <input
                         type="password"
                         id="password"
@@ -78,9 +76,7 @@ export default function Login(): ReactElement {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    <div className={styles.iconForm}>
-                        <Image alt="Logo" width={24.23} height={24.23} src="/senha.png" />
-                    </div>
+                    
                 </div>
                 {erro && (
                     <div className={styles.errorMessage}>

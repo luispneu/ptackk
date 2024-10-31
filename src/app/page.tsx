@@ -18,7 +18,7 @@ export default function Home() {
     <div className={styles.container}>
       <div className={styles.page}>
         <main className={styles.main}>
-          <h1>LA TABLE D'OR</h1>
+          <h1>Tabela</h1>
           <div className={styles.buttonGroup}>
             <button className={styles.loginButton} onClick={handleLogin}>Login</button>
             <button className={styles.signUpButton} onClick={handleSignUp}>Efetuar Cadastro</button>

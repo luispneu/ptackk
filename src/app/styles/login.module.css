@@ -29,7 +29,7 @@
 
 .formGroup label {
     font-size: 16px;
-    color: #6a0dad;
+    color: #00abfa;
     font-weight: bold;
     display: block;
     margin-bottom: 5px;
@@ -39,19 +39,19 @@
     width: 100%;
     padding: 10px;
     padding-right: 40px; 
-    border: 1px solid #6a0dad;
+    border: 1px solid #00abfa;
     border-radius: 5px;
     font-size: 14px;
 }
 
 .formGroup input:focus {
     outline: none;
-    border-color: #8b42f5;
+    border-color: #00abfa;
 }
 
 
 .formGroup button {
-    background-color: #6a0dad;
+    background-color: #00abfa;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -62,7 +62,7 @@
 }
 
 .formGroup button:hover {
-    background-color: #8b42f5;
+    background-color: #00abfa;
 }
 
 
@@ -75,7 +75,7 @@
 
 
 .formGroup a {
-    color: #6a0dad;
+    color: #00abfa;
     text-decoration: none;
 }
 
@@ -84,6 +84,6 @@
 }
 
 .titulo {
-    color: #6a0dad; 
+    color: #00abfa; 
     text-align: center; 
 }

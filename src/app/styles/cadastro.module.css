@@ -8,7 +8,7 @@
 }
 
 .titulo {
-    color: #6a0dad; 
+    color: #00abfa; 
     text-align: center; 
 }
 
@@ -20,24 +20,24 @@
     display: block; 
     margin-bottom: 5px; 
     font-weight: bold; 
-    color: #6a0dad; 
+    color: #00abfa; 
 }
 
 .input {
     width: 100%; 
     padding: 10px;
-    border: 1px solid #6a0dad; 
+    border: 1px solid #00abfa; 
     border-radius: 5px; 
     transition: border-color 0.3s; 
 }
 
 .input:focus {
-    border-color: #a14cd2; 
+    border-color: #00abfa; 
     outline: none; 
 }
 
 .button {
-    background-color: #6a0dad; 
+    background-color: #00abfa; 
     color: white; 
     padding: 10px; 
     border: none;
@@ -48,5 +48,5 @@
 }
 
 .button:hover {
-    background-color: #a14cd2; 
+    background-color: #00abfa; 
 }
