@@ -178,7 +178,7 @@ a.secondary {
 .main h1 {
   font-size: 3rem;
   margin-bottom: 2rem;
-  color: #6a0dad; 
+  color: #00abfa; 
 }
 
 .buttonGroup {
@@ -195,10 +195,10 @@ a.secondary {
   border-radius: 5px;
   cursor: pointer;
   color: #fff;
-  background-color: #6a0dad; 
+  background-color: #00abfa; 
   transition: background-color 0.3s ease;
 }
 
 .loginButton:hover, .signUpButton:hover {
-  background-color: #5c0ca1; 
+  background-color: #00abfa; 
 }
