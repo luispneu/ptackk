@@ -31,6 +31,12 @@
   }
 }
 
+@font-face {
+  font-family: 'MinhaFonte';
+  src: url('/path/to/font.woff') format('woff');
+  font-display: swap;
+}
+
 .page_main__GlU4n {
   display: flex;
   flex-direction: column;
@@ -184,7 +190,7 @@ a.page_secondary__lm_PT {
 .page_main__GlU4n h1 {
   font-size: 3rem;
   margin-bottom: 2rem;
-  color: #00abfa; 
+  color: #00abfa;
 }
 
 .page_buttonGroup__hF6kk {
@@ -194,18 +200,19 @@ a.page_secondary__lm_PT {
   margin-top: 1rem;
 }
 
-.page_loginButton__KoiDv, .page_signUpButton__WkfmQ {
+.page_loginButton__KoiDv,
+.page_signUpButton__WkfmQ {
   padding: 10px 20px;
   font-size: 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   color: #fff;
-  background-color: #00abfa; 
+  background-color: #00abfa;
   transition: background-color 0.3s ease;
 }
 
-.page_loginButton__KoiDv:hover, .page_signUpButton__WkfmQ:hover {
-  background-color: #00abfa; 
+.page_loginButton__KoiDv:hover,
+.page_signUpButton__WkfmQ:hover {
+  background-color: #00abfa;
 }
-

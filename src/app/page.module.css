@@ -27,6 +27,12 @@
   }
 }
 
+@font-face {
+  font-family: 'MinhaFonte';
+  src: url('/path/to/font.woff') format('woff');
+  font-display: swap;
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -178,7 +184,7 @@ a.secondary {
 .main h1 {
   font-size: 3rem;
   margin-bottom: 2rem;
-  color: #00abfa; 
+  color: #00abfa;
 }
 
 .buttonGroup {
@@ -188,17 +194,19 @@ a.secondary {
   margin-top: 1rem;
 }
 
-.loginButton, .signUpButton {
+.loginButton,
+.signUpButton {
   padding: 10px 20px;
   font-size: 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   color: #fff;
-  background-color: #00abfa; 
+  background-color: #00abfa;
   transition: background-color 0.3s ease;
 }
 
-.loginButton:hover, .signUpButton:hover {
-  background-color: #00abfa; 
+.loginButton:hover,
+.signUpButton:hover {
+  background-color: #00abfa;
 }

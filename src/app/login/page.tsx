@@ -22,6 +22,7 @@ export default function Login(): ReactElement {
 
             const usuarios: Usuario[] = await response.json();
             const user = usuarios.find(user => user.email === email && user.password === password);
+            console.log(usuarios); // Verifique a estrutura
 
             if (user) {
                 localStorage.setItem("usuario", JSON.stringify(user));
@@ -32,7 +33,7 @@ export default function Login(): ReactElement {
 
         } catch (error) {
             setErro("Erro ao buscar usuários.");
-            console.error(error);
+            console.error("Erro de rede ou processamento:", error);
         }
     };
 
