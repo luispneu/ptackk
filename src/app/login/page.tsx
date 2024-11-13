@@ -21,7 +21,7 @@ export default function Login(): ReactElement {
             }
 
             const usuarios: Usuario[] = await response.json();
-            const user = usuarios.find(user => user.email === email && user.senha === password);
+            const user = usuarios.find(user => user.email === email && user.password === password);
 
             if (user) {
                 localStorage.setItem("usuario", JSON.stringify(user));
