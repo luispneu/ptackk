@@ -1,4 +1,4 @@
-// File: C:\Users\samue\OneDrive\Documentos\GitHub\ptackk\src\app\cadastro\page.tsx
+// File: C:\Users\laboratorio\picolo\ptackk\src\app\cadastro\page.tsx
 import * as entry from '../../../../src/app/cadastro/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

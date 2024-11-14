@@ -117,7 +117,7 @@ a.page_secondary__lm_PT {
   flex-shrink: 0;
 }
 
-/* Enable hover only on non-touch devices */
+
 @media (hover: hover) and (pointer: fine) {
   a.page_primary__V8M9Y:hover {
     background: var(--button-primary-hover);
