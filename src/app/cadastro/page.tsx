@@ -3,20 +3,23 @@ import React, { useState } from "react";
 import styles from "../styles/cadastro.module.css";
 import { useRouter } from "next/navigation";
 import Usuario from '../interfaces/usuario';
+import { ApiURL } from "../config";
 
 export default function Cadastro() {
+    const router = useRouter();
     const [usuario, setUsuario] = useState<Usuario>({
         nome: '',
         email: '',
-        password: ''
+        password: '',
+        tipo: "cliente"
     });
-    
+    const [mensagem, setMensagem] = useState<string | null>(null);
+
     const alterarNome = (novoNome: string) => {
         setUsuario((valoresAnteriores) => ({
             ...valoresAnteriores,
             nome: novoNome
         }));
-        console.log(usuario);
     };
 
     const alterarEmail = (novoEmail: string) => {
@@ -24,7 +27,6 @@ export default function Cadastro() {
             ...valoresAnteriores,
             email: novoEmail
         }));
-        console.log(usuario);
     };
 
     const alterarPassword = (novaSenha: string) => {
@@ -32,14 +34,33 @@ export default function Cadastro() {
             ...valoresAnteriores,
             password: novaSenha
         }));
-        console.log(usuario);
     };
 
-    const router = useRouter();
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const response = await fetch(`${ApiURL}/auth/cadastro`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(usuario)
+            });
+            const data = await response.json();
+
+            if (data.erro) {
+                setMensagem(data.mensagem);
+            } else {
+                setMensagem("Cadastro realizado com sucesso!");
+                router.push("/");
+            }
+        } catch (error) {
+            console.error('Erro no cadastro:', error);
+            setMensagem("Ocorreu um erro no cadastro. Tente novamente.");
+        }
+    };
 
     return (
         <>
-            <form className={styles.loginForm}>
+            <form onSubmit={handleSubmit} className={styles.loginForm}>
                 <h1 className={styles.titulo}>CADASTRE SUA CONTA</h1>
                 <div className={styles.formGroup}>
                     <label htmlFor="nome" className={styles.label}>Nome</label>
@@ -77,6 +98,7 @@ export default function Cadastro() {
                 <div className={styles.formGroup}>
                     <button type="submit" className={styles.button}>Cadastrar</button>
                 </div>
+                {mensagem && <p className={styles.feedback}>{mensagem}</p>}
             </form>
         </>
     );

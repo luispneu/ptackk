@@ -1,53 +1,58 @@
 'use client';
-import { ReactElement, useState } from "react";
+import { ReactElement, useState, useEffect, FormEvent } from "react";
 import styles from "../styles/login.module.css";
-import { useRouter } from "next/navigation";
-import Usuario from "../interfaces/usuario";
+import { ApiURL } from "../config";
+import { parseCookies, setCookie } from "nookies";
+import { useRouter } from 'next/navigation'; 
 
 export default function Login(): ReactElement {
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [erro, setErro] = useState<string | null>(null);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMsg, setMsgError] = useState('');
+    const router = useRouter();
 
-    const { push } = useRouter();
+    useEffect(() => {
+        const { 'tokencookie': token } = parseCookies();
+        if (token) {
+            console.log('Usuário já autenticado');
+        }
+    }, []);
 
-    const handleLogin = async (e: React.FormEvent) => {
+    const  handleSubmit = async (e :FormEvent) => {
         e.preventDefault();
         try {
-            const response = await fetch("https://prof-jeferson.github.io/API-reservas/usuarios.json");
-            if (!response.ok) {
-                setErro("Erro ao buscar usuários.");
-                return;
-            }
-
-            const usuarios: Usuario[] = await response.json();
-            const user = usuarios.find(user => user.email === email && user.password === password);
-            console.log(usuarios); // Verifique a estrutura
-
-            if (user) {
-                localStorage.setItem("usuario", JSON.stringify(user));
-                push('/home');
+    
+          const response = await fetch(`${ApiURL}/auth/login`, {
+            method: 'POST',
+            headers: {
+              'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify({email, password})
+          })
+      
+          if (response){
+            const data = await response.json();
+            const {erro, mensagem, token} = data
+            console.log(data)
+            if (erro){
+              setMsgError(mensagem)
             } else {
-                setErro("Email ou senha inválidos.");
+              setCookie(undefined, 'tokencookie', token, {
+                maxAge: 60*60*1
+              })
+              router.push('/')
             }
-
+          }
         } catch (error) {
-            setErro("Erro ao buscar usuários.");
-            console.error("Erro de rede ou processamento:", error);
+          console.error('Erro na requisicao', error)
         }
-    };
-
-    const handleForgotPassword = () => {
-        alert('Esqueceu a senha?');
-    };
-
-    const handleSignUp = () => {
-        push("/cadastro");
-    };
+    
+        console.log('Email:', email);
+        console.log('Senha:', password);
+      };
 
     return (
-        <form className={styles.loginForm} onSubmit={handleLogin}>
-            <h1 className={styles.titulo}>ACESSE SUA CONTA</h1>
+        <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.formGroup}>
                 <label htmlFor="email">Email</label>
                 <input
@@ -68,20 +73,8 @@ export default function Login(): ReactElement {
                     required
                 />
             </div>
-            {erro && (
-                <div className={styles.errorMessage}>
-                    {erro}
-                </div>
-            )}
-            <div className={styles.formGroup}>
-                <button type="submit">Acessar Conta</button>
-            </div>
-            <div className={styles.formGroup}>
-                <a href="#" onClick={handleForgotPassword}>Esqueceu a senha?</a>
-            </div>
-            <div className={styles.formGroup}>
-                <button type="button" onClick={handleSignUp}>Não tem conta? Cadastre-se!</button>
-            </div>
+            {errorMsg && <p className={styles.error}>{errorMsg}</p>}
+            <button type="submit">Entrar</button>
         </form>
     );
-}
+};
