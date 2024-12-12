@@ -1,0 +1,92 @@
+/*!***************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/app/styles/login.module.css ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************/
+
+.login_loginForm__sy711 {
+    background-color: #f3e5f5;
+    padding: 30px;
+    border-radius: 10px;
+    width: 350px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.login_formGroup__Vwkmq {
+    margin-bottom: 20px;
+    position: relative; 
+}
+
+
+.login_iconForm__LF0Rb {
+    position: absolute;
+    right: 10px; 
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+.login_formGroup__Vwkmq label {
+    font-size: 16px;
+    color: #00abfa;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.login_formGroup__Vwkmq input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 40px; 
+    border: 1px solid #00abfa;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.login_formGroup__Vwkmq input:focus {
+    outline: none;
+    border-color: #00abfa;
+}
+
+
+.login_formGroup__Vwkmq button {
+    background-color: #00abfa;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.login_formGroup__Vwkmq button:hover {
+    background-color: #00abfa;
+}
+
+
+.login_errorMessage__XKlN8 {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+
+.login_formGroup__Vwkmq a {
+    color: #00abfa;
+    text-decoration: none;
+}
+
+.login_formGroup__Vwkmq a:hover {
+    text-decoration: underline;
+}
+
+.login_titulo__vtYbS {
+    color: #00abfa; 
+    text-align: center; 
+}
