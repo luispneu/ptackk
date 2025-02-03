@@ -1,0 +1,59 @@
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    height: 100vh;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-right: 2px solid #ddd;
+  }
+  
+  .menuContent {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .profileImage {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 2px solid #ccc;
+  }
+  
+  .profileName {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .menuButton {
+    width: 90%;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .menuButton:hover {
+    background-color: #e9ecef;
+  }
+  
+  .popup {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  

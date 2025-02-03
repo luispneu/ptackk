@@ -1,92 +1,117 @@
 /*!***************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./src/app/styles/login.module.css ***!
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/app/styles/login.module.css ***!
   \***************************************************************************************************************************************************************************************************************************************************************************/
-
-.login_loginForm__sy711 {
-    background-color: #f3e5f5;
-    padding: 30px;
-    border-radius: 10px;
-    width: 350px;
-    margin: 0 auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+.login_container__xtDgc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f8f9fa;
 }
 
-
-.login_formGroup__Vwkmq {
-    margin-bottom: 20px;
-    position: relative; 
+.login_card__HAfS1 {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: left;
 }
 
-
-.login_iconForm__LF0Rb {
-    position: absolute;
-    right: 10px; 
-    top: 50%;
-    transform: translateY(-50%);
+.login_title__nDUrg {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-
-.login_formGroup__Vwkmq label {
-    font-size: 16px;
-    color: #00abfa;
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
+.login_error__au_oX {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
-.login_formGroup__Vwkmq input {
-    width: 100%;
-    padding: 10px;
-    padding-right: 40px; 
-    border: 1px solid #00abfa;
-    border-radius: 5px;
-    font-size: 14px;
+.login_label__Pqi5j {
+  font-size: 0.9rem;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
 }
 
-.login_formGroup__Vwkmq input:focus {
-    outline: none;
-    border-color: #00abfa;
+.login_inputWrapper__Ltb9p {
+  position: relative;
+  width: 100%;
 }
 
-
-.login_formGroup__Vwkmq button {
-    background-color: #00abfa;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    width: 100%;
+.login_input__poyrE {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
 }
 
-.login_formGroup__Vwkmq button:hover {
-    background-color: #00abfa;
+.login_showPassword__zoJ4h {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
 }
 
-
-.login_errorMessage__XKlN8 {
-    color: red;
-    font-size: 14px;
-    margin-bottom: 10px;
-    text-align: center;
+.login_rememberContainer__dbbkH {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
 }
 
-
-.login_formGroup__Vwkmq a {
-    color: #00abfa;
-    text-decoration: none;
+.login_checkbox__ZB_Mr {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
 }
 
-.login_formGroup__Vwkmq a:hover {
-    text-decoration: underline;
+.login_rememberLabel__L2k8h {
+  font-size: 0.9rem;
 }
 
-.login_titulo__vtYbS {
-    color: #00abfa; 
-    text-align: center; 
+.login_button__SCk_s {
+  background-color: #0c047a;
+  color: white;
+  padding: 12px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: background-color 0.3s;
 }
+
+.login_button__SCk_s:hover {
+  background-color: #433caa;
+}
+
+.login_signupText__sK3Gg {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+.login_link__oxPBt {
+  color: #0c047a;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login_link__oxPBt:hover {
+  text-decoration: underline;
+}
+

@@ -1,105 +1,120 @@
 "use client";
-import React, { useState } from "react";
-import styles from "../styles/cadastro.module.css";
+
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Usuario from '../interfaces/usuario';
 import { ApiURL } from "../config";
+import styles from "../styles/cadastro.module.css";
 
-export default function Cadastro() {
-    const router = useRouter();
-    const [usuario, setUsuario] = useState<Usuario>({
-        nome: '',
-        email: '',
-        password: '',
-        tipo: "cliente"
+export default function CadastroPage() {
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+
+  const handleCadastro = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+
+    if (nome.length < 6 || email.length < 10 || password.length < 8) {
+      setError("Nome, email ou senha inválidos.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("As senhas não coincidem.");
+      return;
+    }
+
+    const response = await fetch(`${ApiURL}/auth/cadastro`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nome, email, password }),
     });
-    const [mensagem, setMensagem] = useState<string | null>(null);
 
-    const alterarNome = (novoNome: string) => {
-        setUsuario((valoresAnteriores) => ({
-            ...valoresAnteriores,
-            nome: novoNome
-        }));
-    };
+    const data = await response.json();
 
-    const alterarEmail = (novoEmail: string) => {
-        setUsuario((valoresAnteriores) => ({
-            ...valoresAnteriores,
-            email: novoEmail
-        }));
-    };
+    if (data.erro) {
+      setError(data.mensagem);
+    } else {
+      setSuccess("Cadastro realizado com sucesso!");
+      setTimeout(() => router.push("/login"), 2000);
+    }
+  };
 
-    const alterarPassword = (novaSenha: string) => {
-        setUsuario((valoresAnteriores) => ({
-            ...valoresAnteriores,
-            password: novaSenha
-        }));
-    };
+  return (
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <h2 className={styles.title}>Cadastro</h2>
+        {error && <p className={styles.error}>{error}</p>}
+        {success && <p className={styles.success}>{success}</p>}
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        try {
-            const response = await fetch(`${ApiURL}/auth/cadastro`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(usuario)
-            });
-            const data = await response.json();
+        <form onSubmit={handleCadastro} className={styles.form}>
+          <label className={styles.label}>Nome Completo</label>
+          <div className={styles.inputWrapper}>
+            <input
+              type="text"
+              placeholder="Nome completo"
+              className={styles.input}
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+            />
+          </div>
 
-            if (data.erro) {
-                setMensagem(data.mensagem);
-            } else {
-                setMensagem("Cadastro realizado com sucesso!");
-                router.push("/");
-            }
-        } catch (error) {
-            console.error('Erro no cadastro:', error);
-            setMensagem("Ocorreu um erro no cadastro. Tente novamente.");
-        }
-    };
+          <label className={styles.label}>Email</label>
+          <div className={styles.inputWrapper}>
+            <input
+              type="email"
+              placeholder="Email"
+              className={styles.input}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
 
-    return (
-        <>
-            <form onSubmit={handleSubmit} className={styles.loginForm}>
-                <h1 className={styles.titulo}>CADASTRE SUA CONTA</h1>
-                <div className={styles.formGroup}>
-                    <label htmlFor="nome" className={styles.label}>Nome</label>
-                    <input
-                        type="text"
-                        id="nome"
-                        className={styles.input}
-                        value={usuario.nome}
-                        onChange={(e) => alterarNome(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className={styles.formGroup}>
-                    <label htmlFor="email" className={styles.label}>Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        className={styles.input}
-                        value={usuario.email}
-                        onChange={(e) => alterarEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className={styles.formGroup}>
-                    <label htmlFor="password" className={styles.label}>Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        className={styles.input}
-                        value={usuario.password}
-                        onChange={(e) => alterarPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className={styles.formGroup}>
-                    <button type="submit" className={styles.button}>Cadastrar</button>
-                </div>
-                {mensagem && <p className={styles.feedback}>{mensagem}</p>}
-            </form>
-        </>
-    );
+          <label className={styles.label}>Senha</label>
+          <div className={styles.inputWrapper}>
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Senha"
+              className={styles.input}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button
+              type="button"
+              className={styles.showPassword}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "🙈" : "👁"}
+            </button>
+          </div>
+
+          <label className={styles.label}>Confirmar Senha</label>
+          <div className={styles.inputWrapper}>
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Confirme sua senha"
+              className={styles.input}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
+
+          <button type="submit" className={styles.button}>Cadastrar</button>
+        </form>
+
+        <p className={styles.signupText}>
+          Já tem uma conta?{" "}
+          <a href="/login" className={styles.link}>
+            Faça login
+          </a>
+        </p>
+      </div>
+    </div>
+  );
 }

@@ -1,0 +1,111 @@
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.menuContainer {
+  width: 250px; /* Largura do menu */
+  background-color: #f8f9fa;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.contentContainer {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tabButton {
+  padding: 10px 20px;
+  border: none;
+  background-color: #f4f4f4;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.tabButton.active {
+  background-color: #0070f3;
+  color: white;
+}
+
+.content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cadastrarMesas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.button {
+  padding: 10px 20px;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #005bb5;
+}
+
+.mensagem {
+  margin-top: 10px;
+  color: green;
+}
+
+.listarUsuarios {
+  width: 100%;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table th, .table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}

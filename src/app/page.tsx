@@ -1,30 +1,37 @@
-"use client"
-import { useRouter } from 'next/navigation'; 
-import styles from './page.module.css'; 
-import Image from 'next/image';
+"use client";
 
-export default function Home() {
-  const router = useRouter();
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import styles from "./styles/page.module.css";
 
-  const handleLogin = () => {
-    router.push("/login");
-  };
+export default function HomePage() {
+    const router = useRouter();
 
-  const handleSignUp = () => {
-    router.push("/cadastro");
-  };
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            router.push("/reservas");
+        }
+    }, [router]);
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.page}>
-        <main className={styles.main}>
-          <h1>Tabela</h1>
-          <div className={styles.buttonGroup}>
-            <button className={styles.loginButton} onClick={handleLogin}>Login</button>
-            <button className={styles.signUpButton} onClick={handleSignUp}>Efetuar Cadastro</button>
+    return (
+      <div className={styles.container}>
+      <div className={styles.imageSection}></div>
+
+      <div className={styles.formSection}>
+          <div className={styles.card}>
+              <h1 className={styles.title}>Bem-vindo ao Sistema de Reservas</h1>
+              <p className={styles.text}>Acesse para fazer sua reserva.</p>
+
+              <button className={styles.button} onClick={() => router.push("/login")}>
+                  Login
+              </button>
+              <Link href="/cadastro">
+                  <button className={styles.buttonSecondary}>Cadastrar-se</button>
+              </Link>
           </div>
-        </main>
       </div>
-    </div>
-  );
+  </div>
+);
 }

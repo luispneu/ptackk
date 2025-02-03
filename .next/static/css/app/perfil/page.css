@@ -1,0 +1,157 @@
+/*!****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/app/styles/perfil.module.css ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************/
+.perfil_container__K0Q6b {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.perfil_card__44Wii {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: left;
+}
+
+.perfil_title__ElaqJ {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.perfil_error__4h7jE {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.perfil_info__LEcqP {
+  background-color: #e5e7eb;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.perfil_info__LEcqP p {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.perfil_inputWrapper__Hg1KW {
+  margin-bottom: 15px;
+}
+
+.perfil_label__CJV02 {
+  font-size: 0.9rem;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.perfil_input__somEu {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.perfil_button__ZlYxp {
+  background-color: #0c047a;
+  color: white;
+  padding: 12px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+.perfil_button__ZlYxp:hover {
+  background-color: #433caa;
+}
+
+.perfil_editButton__1fyKT {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.perfil_editButton__1fyKT:hover {
+  background-color: #45a049;
+}
+
+.perfil_cancelButton__Yjy_w {
+  background-color: #f44336;
+  color: white;
+  padding: 12px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.perfil_cancelButton__Yjy_w:hover {
+  background-color: #d32f2f;
+}
+
+.perfil_voltarButton__TGOwU {
+  background-color: #555;
+  color: white;
+  padding: 12px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.perfil_voltarButton__TGOwU:hover {
+  background-color: #444;
+}
+
+.perfil_logoutButton__JZkLA {
+  background-color: #dc2626;
+  color: white;
+  padding: 12px;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.perfil_logoutButton__JZkLA:hover {
+  background-color: #b91c1c;
+}

@@ -1,152 +1,307 @@
-"use client"
-import { ChangeEvent, useEffect, useState } from "react";
+"use client";
 
-type MesasType = {
-  id:  number,
-  codigo: string,
-  n_lugares: number
-}
+import { useState, useEffect } from "react";
+import { ApiURL } from "../config";
+import Menu from "../components/Menu";
+import styles from "../styles/reservas.module.css";
 
-export default function Reservas() {
-  const [mesas, setMesas] = useState<MesasType[]>([])
+export default function ReservasCliente() {
+  const [mesas, setMesas] = useState([]);
+  const [reservas, setReservas] = useState([]);
+  const [data, setData] = useState(new Date().toISOString().split("T")[0]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedMesa, setSelectedMesa] = useState<{ id: number; codigo: string } | null>(null);
+  const [selectedReserva, setSelectedReserva] = useState(null);
+  const [nPessoas, setNPessoas] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [exibirMinhasReservas, setExibirMinhasReservas] = useState(false);
+
+  const fetchMesas = async (data: string) => {
+    try {
+      const response = await fetch(`${ApiURL}/mesa/disponibilidade?data=${data}`);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.mensagem || "Erro ao buscar mesas");
+      }
+      const dataResponse = await response.json();
+      setMesas(dataResponse.mesas || []);
+    } catch (error) {
+      console.error("Erro ao buscar mesas:", error);
+      setError(error.message || "Erro ao buscar mesas. Tente novamente.");
+    }
+  };
+
+  const fetchMinhasReservas = async () => {
+    try {
+      const token = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("token="))
+        ?.split("=")[1];
+
+      if (!token) {
+        throw new Error("Usuário não autenticado. Faça login novamente.");
+      }
+
+      const response = await fetch(`${ApiURL}/reservas/minhas`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        const text = await response.text();
+        throw new Error(`Resposta inesperada: ${text}`);
+      }
+
+      const dataResponse = await response.json();
+
+      if (!response.ok) {
+        throw new Error(dataResponse.mensagem || "Erro ao buscar reservas");
+      }
+
+      setReservas(dataResponse.reservas || []);
+    } catch (error) {
+      console.error("Erro ao buscar reservas:", error);
+      setError(error.message || "Erro ao buscar reservas. Tente novamente.");
+    }
+  };
+
   useEffect(() => {
+    if (!exibirMinhasReservas) {
+      fetchMesas(data);
+    }
+  }, [data, exibirMinhasReservas]);
 
-    async function fetchData(){
-      const response = await fetch('http://localhost:3333/reservas')
-      const data = await response.json()
-      setMesas(data.mesas)
+  useEffect(() => {
+    if (exibirMinhasReservas) {
+      fetchMinhasReservas();
+    }
+  }, [exibirMinhasReservas]);
+
+  const handleOpenModal = (mesa: { id: number; codigo: string }) => {
+    setSelectedMesa(mesa);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedMesa(null);
+    setNPessoas("");
+    setError("");
+  };
+
+  const handleReserva = async () => {
+    setLoading(true);
+    setError("");
+
+    const selectedDate = new Date(data);
+    const currentDate = new Date();
+
+    if (selectedDate < currentDate) {
+      setError("A data da reserva não pode ser anterior à data atual.");
+      setLoading(false);
+      return;
     }
 
-    fetchData()
-  }, [])
-  
-  function getDateNow (){
-    const today = new Date()
-    return today.toISOString().split("T")[0]
-  }
+    if (!selectedMesa || !nPessoas || !data) {
+      setError("Por favor, preencha todos os campos.");
+      setLoading(false);
+      return;
+    }
 
-  const [selectedTable, setSelectedTable] = useState('');
-  const [dateTables, setDateTables] = useState(getDateNow)
-  const reservas = [{
-    id : 1,
-    mesa: 1,
-    data: '2024-11-29'
-  }, 
-  {
-    id : 1,
-    mesa: 2,
-    data: '2024-11-29'
-  },
-  {
-    id : 1,
-    mesa: 2,
-    data: '2024-11-28'
-  }]
+    const token = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("token="))
+      ?.split("=")[1];
 
+    if (!token) {
+      setError("Usuário não autenticado. Faça login novamente.");
+      setLoading(false);
+      return;
+    }
 
+    try {
+      const dataReserva = new Date(data).toISOString();
 
-  function handleChangeDate (e: ChangeEvent<HTMLInputElement>) {
-    setDateTables(e.target.value)
-  }
+      const response = await fetch(`${ApiURL}/reservas/novo`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          mesaId: selectedMesa.id,
+          n_pessoas: parseInt(nPessoas),
+          data: dataReserva,
+        }),
+      });
 
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.mensagem || "Erro ao fazer reserva");
+      }
+
+      const dataResponse = await response.json();
+      alert(dataResponse.mensagem);
+      handleCloseModal();
+      fetchMesas(data);
+    } catch (error) {
+      console.error("Erro ao fazer reserva:", error);
+      setError(error.message || "Erro ao fazer reserva. Tente novamente.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCancelarReserva = async (reservaId: number) => {
+    if (!window.confirm("Tem certeza que deseja cancelar esta reserva?")) {
+      return;
+    }
+
+    try {
+      const token = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("token="))
+        ?.split("=")[1];
+
+      if (!token) {
+        throw new Error("Usuário não autenticado. Faça login novamente.");
+      }
+
+      const response = await fetch(`${ApiURL}/reservas/cancelar`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ reservaId }),
+      });
+
+      const contentType = response.headers.get("content-type");
+      if (!response.ok) {
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await response.json();
+          throw new Error(errorData.mensagem || "Erro ao cancelar reserva");
+        } else {
+          throw new Error("Erro inesperado ao cancelar a reserva.");
+        }
+      }
+
+      const dataResponse = await response.json();
+      alert(dataResponse.mensagem);
+      fetchMinhasReservas();
+    } catch (error) {
+      console.error("Erro ao cancelar reserva:", error);
+      setError(error.message || "Erro ao cancelar reserva. Tente novamente.");
+    }
+  };
+
+  const toggleExibirMinhasReservas = () => {
+    setExibirMinhasReservas(!exibirMinhasReservas);
+  };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col lg:flex-row">
-      
-      <div className="w-full lg:w-1/4 text-white p-4 flex items-center">
-        <div className="bg-white text-gray-800 rounded-lg shadow-lg p-4 w-full max-w-sm">
-          {/*<img
-            src="https://github.com/MrMinerin.png"
-            alt="Usuário"
-            className="w-24 h-24 mx-auto rounded-full border-4 border-indigo-500"
-          />*/}
-          <h2 className="text-center text-lg font-bold mt-4">Jéferson Carlos de Souza</h2>
-          <p className="text-center text-gray-600">Cliente</p>
-        </div>
-      </div>
+    <div className={styles.container}>
+      <Menu onMinhasReservasClick={toggleExibirMinhasReservas} />
+      <div className={styles.mainContent}>
+        <h2 className={styles.title}>{exibirMinhasReservas ? "Minhas Reservas" : "Reservas"}</h2>
 
+        {error && <p className={styles.error}>{error}</p>}
 
-      <div className="w-full lg:w-1/2 bg-white p-6">
-        <div>
-          <h2 className="text-xl font-bold mb-4">Mesas Disponíveis</h2>
-          <label className="flex flex-col">
-                <input
-                  type="date"
-                  value={dateTables}
-                  min={getDateNow()}
-                  className="p-2 border rounded"
-                  onChange={handleChangeDate}
-
-                />
-          </label>
-        </div>
-        
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-2">
-          {mesas.map((table) => {
-          if (reservas.find(reserva => dateTables === reserva.data && reserva.mesa === table.id)){
-            return (
-              <button
-                key={table.id}
-                className="p-4 text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:bg-red-700"
-                onClick={() => setSelectedTable(table.codigo)}
-              >
-                {table.codigo}
-              </button>
-            )
-          } else {
-          return (
-            <button
-              key={table.id}
-              className="p-4 text-white bg-indigo-500 rounded-lg hover:bg-indigo-600 focus:outline-none focus:bg-indigo-700"
-              onClick={() => setSelectedTable(table.codigo)}
-            >
-              {table.codigo}
-            </button>
-          )}})}
-        </div>
-      </div>
-
-
-      <div className="w-full lg:w-1/4 bg-gray-100 p-4 border-t lg:border-t-0 lg:border-l">
-        {selectedTable ? (
-          <div>
-            <h2 className="text-xl font-bold mb-4">Reservar {selectedTable}</h2>
-            <form className="flex flex-col space-y-4">
-              <label className="flex flex-col">
-                Nome:
-                <input
-                  type="text"
-                  className="p-2 border rounded"
-                  placeholder="Seu nome"
-                />
-              </label>
-              <label className="flex flex-col">
-                Data:
-                <input
-                  type="date"
-                  className="p-2 border rounded"
-                />
-              </label>
-              <label className="flex flex-col">
-                Pessoas:
-                <input
-                  type="number"
-                  max={4}
-                  min={1}
-                
-                  className="p-2 border rounded"
-                />
-              </label>
-              <button
-                type="submit"
-                className="bg-indigo-500 text-white p-2 rounded-lg hover:bg-indigo-600 focus:outline-none focus:bg-indigo-700"
-              >
-                Confirmar Reserva
-              </button>
-            </form>
+        {exibirMinhasReservas ? (
+          <div className={styles.reservasContainer}>
+            {reservas.map((reserva) => (
+              <div key={reserva.id} className={styles.reserva}>
+                <p>Mesa: {reserva.mesa.codigo}</p>
+                <p>Data: {new Date(reserva.data).toLocaleDateString()}</p>
+                <p>Número de Pessoas: {reserva.n_pessoas}</p>
+                <button
+                  className={styles.editarButton}
+                  onClick={() => handleOpenModal(reserva)}
+                >
+                  Editar
+                </button>
+                <button
+                  className={styles.cancelarButton}
+                  onClick={() => handleCancelarReserva(reserva.id)}
+                >
+                  Cancelar
+                </button>
+              </div>
+            ))}
           </div>
         ) : (
-          <p className="text-gray-700">Selecione uma mesa para reservar</p>
+          <>
+            <div className={styles.filterContainer}>
+              <label htmlFor="data">Data:</label>
+              <input
+                type="date"
+                id="data"
+                value={data}
+                onChange={(e) => setData(e.target.value)}
+                className={styles.dateInput}
+              />
+            </div>
+
+            <div className={styles.mesasContainer}>
+              {mesas.map((mesa: any) => {
+                const isReservada = mesa.reservas && mesa.reservas.length > 0;
+                return (
+                  <div
+                    key={mesa.id}
+                    className={`${styles.mesa} ${isReservada ? styles.mesaReservada : ""}`}
+                    onClick={() => !isReservada && handleOpenModal(mesa)}
+                    title={isReservada ? `Reservada para ${mesa.reservas[0].n_pessoas} pessoas` : "Disponível"}
+                  >
+                    <p>Mesa {mesa.codigo}</p>
+                    <p>Lugares: {mesa.n_lugares}</p>
+                    {isReservada && <p>Ocupada</p>}
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        )}
+
+        {showModal && selectedMesa && (
+          <div className={styles.modalOverlay} onClick={handleCloseModal}>
+            <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+              <button className={styles.closeButton} onClick={handleCloseModal}>
+                &times;
+              </button>
+              <h2 className={styles.modalTitle}>Reservar Mesa {selectedMesa.codigo}</h2>
+              <input
+                type="date"
+                value={data}
+                onChange={(e) => setData(e.target.value)}
+                className={styles.modalInput}
+                placeholder="Data da Reserva"
+              />
+              <input
+                type="number"
+                placeholder="Número de Pessoas"
+                value={nPessoas}
+                onChange={(e) => setNPessoas(e.target.value)}
+                className={styles.modalInput}
+              />
+              {error && <p className={styles.modalError}>{error}</p>}
+              <button
+                className={styles.confirmButton}
+                onClick={handleReserva}
+                disabled={loading}
+              >
+                {loading ? "Processando..." : "Confirmar Reserva"}
+              </button>
+              <button
+                className={styles.cancelButton}
+                onClick={handleCloseModal}
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
         )}
       </div>
     </div>

@@ -1,0 +1,96 @@
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.imageSection {
+    flex: 1;
+    background: url("/image.png") no-repeat center center;
+    background-size: cover;
+}
+
+.formSection {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+}
+
+.card {
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.text {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.button {
+    background-color: #0c047a;
+    color: white;
+    padding: 12px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #433caa;
+}
+
+.buttonSecondary {
+    background-color: transparent;
+    color: #0c047a;
+    padding: 12px;
+    border-radius: 30px;
+    border: 2px solid #0c047a;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.buttonSecondary:hover {
+    background-color: #0c047a;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .imageSection {
+        height: 40vh;
+    }
+
+    .formSection {
+        height: 60vh;
+        align-items: center;
+    }
+
+    .card {
+        width: 90%;
+    }
+}
