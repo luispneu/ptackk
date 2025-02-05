@@ -1,0 +1,100 @@
+/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/app/styles/page.module.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************/
+.page_container___MsG6 {
+    display: flex;
+    height: 100vh;
+}
+
+.page_imageSection__lyv0p {
+    flex: 1 1;
+    background: url("/image.png") no-repeat center center;
+    background-size: cover;
+}
+
+.page_formSection__23iNA {
+    flex: 1 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+}
+
+.page_card__EI4kK {
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.page_title__YTQFW {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.page_text__noH5I {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.page_button__TSX67 {
+    background-color: #0c047a;
+    color: white;
+    padding: 12px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+.page_button__TSX67:hover {
+    background-color: #433caa;
+}
+
+.page_buttonSecondary__rgiQR {
+    background-color: transparent;
+    color: #0c047a;
+    padding: 12px;
+    border-radius: 30px;
+    border: 2px solid #0c047a;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.page_buttonSecondary__rgiQR:hover {
+    background-color: #0c047a;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .page_container___MsG6 {
+        flex-direction: column;
+    }
+
+    .page_imageSection__lyv0p {
+        height: 40vh;
+    }
+
+    .page_formSection__23iNA {
+        height: 60vh;
+        align-items: center;
+    }
+
+    .page_card__EI4kK {
+        width: 90%;
+    }
+}
+

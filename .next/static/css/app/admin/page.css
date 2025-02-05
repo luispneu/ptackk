@@ -1,0 +1,176 @@
+/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/app/styles/menu.module.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************/
+.menu_menu__ctII7 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    height: 100vh;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-right: 2px solid #ddd;
+  }
+  
+  .menu_menuContent__naRp_ {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .menu_profileImage__zdhl_ {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 2px solid #ccc;
+  }
+  
+  .menu_profileName__Abi2G {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .menu_menuButton__2nPWK {
+    width: 90%;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu_menuButton__2nPWK:hover {
+    background-color: #e9ecef;
+  }
+  
+  .menu_popup__Z8yZt {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+/*!***************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/app/styles/admin.module.css ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************/
+.admin_container__673Xl {
+  display: flex;
+  height: 100vh;
+}
+
+.admin_menuContainer__kJC7S {
+  width: 250px; /* Largura do menu */
+  background-color: #f8f9fa;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.admin_contentContainer__5w82W {
+  flex: 1 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.admin_title__UG9d5 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.admin_tabs__sQRSw {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.admin_tabButton__fECyy {
+  padding: 10px 20px;
+  border: none;
+  background-color: #f4f4f4;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.admin_tabButton__fECyy.admin_active__UT_Lc {
+  background-color: #0070f3;
+  color: white;
+}
+
+.admin_content__IgVKG {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.admin_cadastrarMesas__ds_ie {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin_input__Vqt0T {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.admin_button__EEKxw {
+  padding: 10px 20px;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.admin_button__EEKxw:hover {
+  background-color: #005bb5;
+}
+
+.admin_mensagem__dBEWE {
+  margin-top: 10px;
+  color: green;
+}
+
+.admin_listarUsuarios__tKT8M {
+  width: 100%;
+}
+
+.admin_table__KvooZ {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.admin_table__KvooZ th, .admin_table__KvooZ td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.admin_table__KvooZ th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.admin_table__KvooZ tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.admin_table__KvooZ tr:hover {
+  background-color: #f1f1f1;
+}
+
+.admin_error__J_Csv {
+  color: red;
+  margin-top: 10px;
+}

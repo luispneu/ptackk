@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { ApiURL } from "../config";
 import Menu from "../components/Menu";
 import styles from "../styles/reservas.module.css";
+import { parseCookies } from "nookies";
 
 export default function ReservasCliente() {
   const [mesas, setMesas] = useState([]);
@@ -28,16 +29,12 @@ export default function ReservasCliente() {
       setMesas(dataResponse.mesas || []);
     } catch (error) {
       console.error("Erro ao buscar mesas:", error);
-      setError(error.message || "Erro ao buscar mesas. Tente novamente.");
     }
   };
 
   const fetchMinhasReservas = async () => {
     try {
-      const token = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("token="))
-        ?.split("=")[1];
+      const { token } = parseCookies();
 
       if (!token) {
         throw new Error("Usuário não autenticado. Faça login novamente.");
@@ -49,22 +46,15 @@ export default function ReservasCliente() {
         },
       });
 
-      const contentType = response.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-        const text = await response.text();
-        throw new Error(`Resposta inesperada: ${text}`);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.mensagem || "Erro ao buscar reservas");
       }
 
       const dataResponse = await response.json();
-
-      if (!response.ok) {
-        throw new Error(dataResponse.mensagem || "Erro ao buscar reservas");
-      }
-
       setReservas(dataResponse.reservas || []);
     } catch (error) {
       console.error("Erro ao buscar reservas:", error);
-      setError(error.message || "Erro ao buscar reservas. Tente novamente.");
     }
   };
 
@@ -111,10 +101,7 @@ export default function ReservasCliente() {
       return;
     }
 
-    const token = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("token="))
-      ?.split("=")[1];
+    const { token } = parseCookies();
 
     if (!token) {
       setError("Usuário não autenticado. Faça login novamente.");
@@ -149,7 +136,6 @@ export default function ReservasCliente() {
       fetchMesas(data);
     } catch (error) {
       console.error("Erro ao fazer reserva:", error);
-      setError(error.message || "Erro ao fazer reserva. Tente novamente.");
     } finally {
       setLoading(false);
     }
@@ -161,10 +147,7 @@ export default function ReservasCliente() {
     }
 
     try {
-      const token = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("token="))
-        ?.split("=")[1];
+      const { token } = parseCookies();
 
       if (!token) {
         throw new Error("Usuário não autenticado. Faça login novamente.");
@@ -179,14 +162,9 @@ export default function ReservasCliente() {
         body: JSON.stringify({ reservaId }),
       });
 
-      const contentType = response.headers.get("content-type");
       if (!response.ok) {
-        if (contentType && contentType.includes("application/json")) {
-          const errorData = await response.json();
-          throw new Error(errorData.mensagem || "Erro ao cancelar reserva");
-        } else {
-          throw new Error("Erro inesperado ao cancelar a reserva.");
-        }
+        const errorData = await response.json();
+        throw new Error(errorData.mensagem || "Erro ao cancelar reserva");
       }
 
       const dataResponse = await response.json();
@@ -194,7 +172,6 @@ export default function ReservasCliente() {
       fetchMinhasReservas();
     } catch (error) {
       console.error("Erro ao cancelar reserva:", error);
-      setError(error.message || "Erro ao cancelar reserva. Tente novamente.");
     }
   };
 
